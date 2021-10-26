@@ -11,7 +11,7 @@ import { RecipeDetailComponent } from './recipe-book/recipe/recipe-detail/recipe
 import { RecipeComponent } from './recipe-book/recipe/recipe.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list/shopping-list.component';
 import { ShoppingListFormComponent } from './shopping-list/shopping-list/shopping-list-form/shopping-list-form.component';
-import { HeaderComponent } from './navigation/header/header.component';
+import { HeaderComponent } from './header/header.component';
 
 
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -20,7 +20,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
-import { NavigationComponent } from './navigation/navigation.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +32,6 @@ import { NavigationComponent } from './navigation/navigation.component';
     ShoppingListComponent,
     ShoppingListFormComponent,
     HeaderComponent,
-    NavigationComponent
   ],
   imports: [
     BrowserModule,

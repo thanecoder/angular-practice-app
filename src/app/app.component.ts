@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  @ViewChild('drawer') sidenav:MatSidenav;
   title = 'recipe-list-shopping-list';
+
+  toggleSidenav(){
+    console.log('I have received event from Header Hamburger button click, so I will now open Sidenav');
+    this.sidenav.toggle();
+  }
 }

@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-header',

@@ -2,3 +2,10 @@
     margin: 0;
     height: 100%;
 }
+.sidenav-class{    
+    width: 400px;
+    height: 100%;
+}
+.sidenav-icon{
+    margin: 5px;
+}
