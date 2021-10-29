@@ -7,11 +7,10 @@ import { MatSidenav } from '@angular/material/sidenav';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  @ViewChild('drawer') sidenav:MatSidenav;
+  @ViewChild('drawer') sidenav : MatSidenav;
   title = 'recipe-list-shopping-list';
 
   toggleSidenav(){
-    console.log('I have received event from Header Hamburger button click, so I will now open Sidenav');
     this.sidenav.toggle();
   }
 }

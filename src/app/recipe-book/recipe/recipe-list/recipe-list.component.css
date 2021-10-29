@@ -1,0 +1,10 @@
+.recipe-list-container{
+    margin-top: 8%;
+}
+.recipe-list{
+    max-height: 485px;
+    overflow-y: scroll;
+}
+.recipe-list::-webkit-scrollbar{ 
+    width :6px; 
+}

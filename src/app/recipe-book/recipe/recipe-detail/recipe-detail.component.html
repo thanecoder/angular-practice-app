@@ -1,1 +1,24 @@
-<p>recipe-detail works!</p>
+<div class="row recipe-detail-block">
+    <mat-card [class.mat-elevation-z0]='true' class="example-card">
+        <mat-card-header>
+            <img 
+            mat-card-avatar
+            [src]="recipeToBeDisplayed.imagePath" 
+            class="example-header-image"
+            alt="Recipe Photo">
+          <mat-card-title>{{ recipeToBeDisplayed.name }}</mat-card-title>
+        </mat-card-header>
+        <img 
+          mat-card-image 
+          [src]="recipeToBeDisplayed.imagePath" 
+          alt="Recipe Photo"
+          class="card-image">
+        <mat-card-content>
+          <p>
+            {{ recipeToBeDisplayed.description }}
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+        </mat-card-actions>
+    </mat-card>
+</div>

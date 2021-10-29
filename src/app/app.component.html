@@ -1,16 +1,19 @@
 <mat-sidenav-container class="layout">
   <mat-sidenav class="sidenav-class" #drawer mode="over">
-    <mat-nav-list>
+    <mat-nav-list role="navigation" disableRipple="true">
       <div mat-subheader>Go To</div>
       <mat-divider></mat-divider>
-      <a mat-list-item routerLink="/recipeBook">
-          <mat-icon class="sidenav-icon">menu_book</mat-icon> <span class="nav-caption">Recipe Book</span>
+      <a mat-list-item routerLink="/recipebook" disableRipple="true" (click)="drawer.toggle()">
+          <mat-icon matListIcon class="sidenav-icon">menu_book</mat-icon> <span class="nav-caption">Recipe Book</span>
       </a>
-      <a mat-list-item routerLink="/shoppingList" >
-          <mat-icon class="sidenav-icon">list</mat-icon><span class="nav-caption">Shopping List</span>
+      <a mat-list-item routerLink="/shoppinglist" disableRipple="true" (click)="drawer.toggle()">
+          <mat-icon matListIcon class="sidenav-icon">list</mat-icon><span class="nav-caption">Shopping List</span>
+      </a>
+      <a mat-list-item routerLink="/newrecipe" disableRipple="true" (click)="drawer.toggle()">
+          <mat-icon matListIcon class="sidenav-icon">list</mat-icon><span class="nav-caption">New Recipe</span>
       </a>
       <mat-list-item (click)="drawer.toggle()">
-          <span >Close</span>
+          <span class="nav-caption">Close</span>
       </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>
@@ -19,8 +22,7 @@
     <div class="container">
       <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <app-recipe></app-recipe>
-            <app-shopping-list></app-shopping-list>
+            <router-outlet></router-outlet>
           </div>
       </div>
     </div>
