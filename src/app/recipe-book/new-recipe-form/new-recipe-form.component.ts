@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatStepperModule} from '@angular/material/stepper';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 
@@ -21,6 +21,9 @@ export class NewRecipeFormComponent implements OnInit {
   recipeSaucesFormGroup: FormGroup;     //Checkboxes
   recipeIngredientsFormGroup: FormGroup;    //New Input cum Dropdown
 
+  sauces: string[] = ['Tandoori Mayo', 'Mint Mayo', 'Sweet Onion', 'Barbeque'];
+  ingredientUnits:string[] = ['metre','gram','litre']
+
   constructor(private _formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
@@ -33,16 +36,40 @@ export class NewRecipeFormComponent implements OnInit {
     this.recipeImageFormGroup = this._formBuilder.group({
       imagePath: ['', Validators.required]
     });
-    this.recipeSaucesFormGroup = this._formBuilder.group({
-      sauces: this._formBuilder.array([
-        this._formBuilder.control('')
-      ])
-    });
     this.recipeIngredientsFormGroup = this._formBuilder.group({
-      ingredients: this._formBuilder.array([
-        this._formBuilder.control('')
-      ])
+      ingredients: this._formBuilder.array([this.createIngredientInput()], Validators.required)
     });
+    this.recipeSaucesFormGroup = this._formBuilder.group({});
+
+    this.recipeSaucesFormGroup.addControl('sauces',new FormGroup({}));
+
+    this.sauces.forEach(sauce=>{
+      let sauceFormGrp = this.recipeSaucesFormGroup.controls['sauces'] as FormGroup;
+      sauceFormGrp.addControl(sauce,new FormControl(false));
+    });
+    console.log('this.recipeIngredientsFormGroup',this.recipeIngredientsFormGroup);
+
+  }
+
+  addIngredient(){
+    let ingredients = this.recipeIngredientsFormGroup.controls['ingredients'] as FormArray;
+    ingredients.push(this.createIngredientInput());
+  }
+
+  deleteIngredient(){
+    let ingredients = this.recipeIngredientsFormGroup.controls['ingredients'] as FormArray;
+    ingredients.removeAt(ingredients.length-1);
+  }
+
+  get ingredients() {
+    return this.recipeIngredientsFormGroup.get('ingredients') as FormArray;
+  }
+
+  createIngredientInput():FormGroup{
+    return new FormGroup({
+      name:new FormControl(''),
+      units:new FormControl('')
+    })
   }
 
 }
