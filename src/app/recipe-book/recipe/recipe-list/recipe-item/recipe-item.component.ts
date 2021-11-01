@@ -17,8 +17,7 @@ export class RecipeItemComponent implements OnInit {
     this.recipeBookServ = recipeBookService;
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   showRecipeDetails(recipe:Recipe){
     this.recipeBookServ.selectedRecipe.next(recipe);

@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RecipeListComponent } from './recipe-book/recipe/recipe-list/recipe-list.component';
@@ -62,7 +63,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatInputModule,
     MatChipsModule,
     MatCheckboxModule,
-    MatSelectModule
+    MatSelectModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

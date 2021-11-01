@@ -1,87 +1,96 @@
-<mat-vertical-stepper #stepper>
-    <mat-step [stepControl]="recipeNameFormGroup" errorMessage="Name is required.">
-      <form [formGroup]="recipeNameFormGroup">
-        <ng-template matStepLabel>Fill out recipe name</ng-template>
-        <mat-form-field appearance="fill">
-          <mat-label>Name</mat-label>
-          <input matInput placeholder="Recipe Name" formControlName="recipeName" required>
-        </mat-form-field>
-        <div>
-          <!-- <p>Go to a different step to see the error state</p> -->
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step [stepControl]="recipeDescriptionFormGroup" errorMessage="Description is required.">
-      <form [formGroup]="recipeDescriptionFormGroup">
-        <ng-template matStepLabel>Fill out recipe description</ng-template>
-        <mat-form-field appearance="fill">
-          <mat-label>Description</mat-label>
-          <textarea matInput placeholder="Description" formControlName="recipeDescription" required>
-          </textarea>
-        </mat-form-field>
-        <div>
-          <!-- <p>Go to a different step to see the error state</p> -->
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step [stepControl]="recipeImageFormGroup" errorMessage="Image is required.">
-      <form [formGroup]="recipeImageFormGroup">
-        <ng-template matStepLabel>Provide an Image URL</ng-template>
-        <mat-form-field appearance="fill">
-          <mat-label>Image URL</mat-label>
-          <input matInput placeholder="https://example.com" formControlName="imagePath" required>
-        </mat-form-field>
-        <div>
-          <!-- <p>Go to a different step to see the error state</p> -->
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step [stepControl]="recipeIngredientsFormGroup" errorMessage="Ingredients are required.">
-      <form [formGroup]="recipeIngredientsFormGroup">
-        <ng-template matStepLabel>Add Ingredients</ng-template>
-        <div 
-          formArrayName="ingredients" 
-          appearance="fill" 
-          *ngFor="let ingredient of ingredients.controls; let i = index;"
-          class="ingredient-single-input">
-          <div [formGroupName]="i">
-            <mat-label>Ingredients</mat-label>
-              <input class="ingredient-input" type="text" matInput formControlName="name" placeholder="Name">
-              <mat-select placeholder="Units" class="ingredient-input" formControlName="units">
-                <mat-option *ngFor="let unit of ingredientUnits">
-                  {{unit}}
-                </mat-option> 
-              </mat-select>
+<div class="new-recipe-form-container">
+  <mat-vertical-stepper #stepper>
+      <mat-step [stepControl]="recipeNameFormGroup" errorMessage="Name is required.">
+        <form [formGroup]="recipeNameFormGroup">
+          <ng-template matStepLabel>Fill out recipe name</ng-template>
+          <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Recipe Name" formControlName="recipeName" required>
+          </mat-form-field>
+          <div>
+            <!-- <p>Go to a different step to see the error state</p> -->
+            <button mat-button matStepperNext>Next</button>
           </div>
-        </div>
-        <button class="btn btn-sm btn-primary add-ingredients-button" (click)="addIngredient()">Add</button>
-        <button class="btn btn-sm btn-primary add-ingredients-button" (click)="deleteIngredient()">Delete</button>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="recipeDescriptionFormGroup" errorMessage="Description is required.">
+        <form [formGroup]="recipeDescriptionFormGroup">
+          <ng-template matStepLabel>Fill out recipe description</ng-template>
+          <mat-form-field appearance="fill">
+            <mat-label>Description</mat-label>
+            <textarea matInput placeholder="Description" formControlName="recipeDescription" required>
+            </textarea>
+          </mat-form-field>
+          <div>
+            <!-- <p>Go to a different step to see the error state</p> -->
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="recipeImageFormGroup" errorMessage="Image is required.">
+        <form [formGroup]="recipeImageFormGroup">
+          <ng-template matStepLabel>Provide an Image URL</ng-template>
+          <mat-form-field appearance="fill">
+            <mat-label>Image URL</mat-label>
+            <input matInput placeholder="https://example.com" formControlName="imagePath" required>
+          </mat-form-field>
+          <div>
+            <!-- <p>Go to a different step to see the error state</p> -->
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="recipeIngredientsFormGroup" errorMessage="Ingredients are required.">
+        <form [formGroup]="recipeIngredientsFormGroup">
+          <ng-template matStepLabel>Add Ingredients</ng-template>
+          <mat-label>Ingredients</mat-label>
+          <br/>
+          <div 
+            formArrayName="ingredients" 
+            appearance="fill" 
+            *ngFor="let ingredient of ingredients.controls; let i = index;"
+            class="ingredient-single-input">
+            <div [formGroupName]="i" class="ingredient-input">
+                <input class="ingredient-input" type="text" matInput formControlName="name" placeholder="Name">
+                <mat-select placeholder="Units" class="ingredient-input" formControlName="units">
+                  <mat-option *ngFor="let unit of ingredientUnits" [value]='unit'>
+                    {{unit}}
+                  </mat-option> 
+                </mat-select>
+            </div>
+          </div>
+          <div class='ingredient-action-buttons'>
+            <button class="btn btn-sm btn-primary ingredients-button" (click)="addIngredient()">Add</button>
+            <button class="btn btn-sm btn-primary ingredients-button" (click)="deleteIngredient()">Delete</button>
+          </div>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="recipeSaucesFormGroup">
+        <section class="example-section" [formGroup]="recipeSaucesFormGroup.controls['sauces']">
+          <ng-template matStepLabel>Pick the sauces</ng-template>
+          <div *ngFor="let sauce of sauces">
+            <mat-checkbox [formControlName]="sauce">{{ sauce }}</mat-checkbox>
+          </div>
+        </section>
         <div>
-          <!-- <p>Go to a different step to see the error state</p> -->
           <button mat-button matStepperPrevious>Back</button>
           <button mat-button matStepperNext>Next</button>
         </div>
-      </form>
-    </mat-step>
-    <mat-step [stepControl]="recipeSaucesFormGroup">
-      <section class="example-section" [formGroup]="recipeSaucesFormGroup.controls['sauces']">
-        <ng-template matStepLabel>Pick the sauces</ng-template>
-        <div *ngFor="let sauce of sauces">
-          <mat-checkbox [formControlName]="sauce">{{ sauce }}</mat-checkbox>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <div>
+          <button class="btn btn-success form-action-buttons" color="accent" type="submit" (click)="submitForm()">Submit</button>
+          <button class="btn btn btn-primary form-action-buttons"matStepperPrevious>Back</button>
+          <button class="btn btn-danger form-action-buttons" (click)="stepper.reset()">Reset</button>
+          <button class="btn btn-success form-action-buttons" (click)="goToHomeScreen()">Home</button>
         </div>
-      </section>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      <div>
-        <button class="btn btn-success form-action-buttons" color="accent" type="submit">Submit</button>
-        <button class="btn btn btn-secondary form-action-buttons" color="accent" matStepperPrevious>Back</button>
-        <button class="btn btn-danger form-action-buttons" color="warn" (click)="stepper.reset()">Reset</button>
-      </div>
-    </mat-step>
-</mat-vertical-stepper>
+      </mat-step>
+  </mat-vertical-stepper>
+</div>

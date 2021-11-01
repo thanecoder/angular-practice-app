@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatStepperModule} from '@angular/material/stepper';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-recipe-form',
@@ -15,6 +16,7 @@ import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 })
 export class NewRecipeFormComponent implements OnInit {
 
+  newRecipeForm:FormGroup;
   recipeNameFormGroup: FormGroup;
   recipeDescriptionFormGroup: FormGroup;
   recipeImageFormGroup: FormGroup;
@@ -22,9 +24,9 @@ export class NewRecipeFormComponent implements OnInit {
   recipeIngredientsFormGroup: FormGroup;    //New Input cum Dropdown
 
   sauces: string[] = ['Tandoori Mayo', 'Mint Mayo', 'Sweet Onion', 'Barbeque'];
-  ingredientUnits:string[] = ['metre','gram','litre']
+  ingredientUnits:string[] = ['slices','teaspoons','dollops','tablespoons','cups','gms','ltrs']
 
-  constructor(private _formBuilder: FormBuilder) { }
+  constructor(private _formBuilder: FormBuilder, private router:Router) { }
 
   ngOnInit(): void {
     this.recipeNameFormGroup = this._formBuilder.group({
@@ -69,7 +71,15 @@ export class NewRecipeFormComponent implements OnInit {
     return new FormGroup({
       name:new FormControl(''),
       units:new FormControl('')
-    })
+    });
+  }
+
+  goToHomeScreen(){
+    this.router.navigate(['/','recipebook']);
+  }
+
+  submitForm(){
+    
   }
 
 }

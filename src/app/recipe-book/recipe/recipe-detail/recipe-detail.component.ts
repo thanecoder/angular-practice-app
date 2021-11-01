@@ -16,15 +16,12 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.recipeBookServ.selectedRecipe.subscribe(
-      (recipe)=>{
-        // console.log(recipe);
-        this.recipeToBeDisplayed = recipe
-      },
-      (error)=>{
-        console.log(error);
+    this.getSelectedRecipe();
+    setTimeout(()=>{
+      if(!this.recipeToBeDisplayed){
+        this.recipeToBeDisplayed = this.recipeBookService.dummyRecipe;
       }
-    );
+    },1000)
   }
 
   getSelectedRecipe(){
