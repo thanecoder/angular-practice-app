@@ -31,7 +31,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatChipsModule } from '@angular/material/chips';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
-
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -51,6 +51,7 @@ import {MatSelectModule} from '@angular/material/select';
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     MatToolbarModule,
     MatIconModule,
     MatSidenavModule,
@@ -64,7 +65,7 @@ import {MatSelectModule} from '@angular/material/select';
     MatChipsModule,
     MatCheckboxModule,
     MatSelectModule,
-    HttpClientModule
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

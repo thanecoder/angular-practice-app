@@ -3,7 +3,9 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angul
 import {MatStepperModule} from '@angular/material/stepper';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 import { Router } from '@angular/router';
+import { RecipeBookService } from 'src/app/services/recipe-book.service';
 
+import {MatSnackBar} from '@angular/material/snack-bar';
 @Component({
   selector: 'app-new-recipe-form',
   templateUrl: './new-recipe-form.component.html',
@@ -26,7 +28,8 @@ export class NewRecipeFormComponent implements OnInit {
   sauces: string[] = ['Tandoori Mayo', 'Mint Mayo', 'Sweet Onion', 'Barbeque'];
   ingredientUnits:string[] = ['slices','teaspoons','dollops','tablespoons','cups','gms','ltrs']
 
-  constructor(private _formBuilder: FormBuilder, private router:Router) { }
+  constructor(private _formBuilder: FormBuilder, private router:Router,
+    private recipeBookServ:RecipeBookService, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.recipeNameFormGroup = this._formBuilder.group({
@@ -79,7 +82,27 @@ export class NewRecipeFormComponent implements OnInit {
   }
 
   submitForm(){
-    
+    let reqObj = {
+      name:this.recipeNameFormGroup.controls['recipeName'].value,
+      description:this.recipeDescriptionFormGroup.controls['recipeDescription'].value,
+      img:this.recipeImageFormGroup.controls['imagePath'].value,
+      ingredients:this.recipeIngredientsFormGroup.value,
+      sauces:this.recipeSaucesFormGroup.value
+    }
+    console.log(reqObj);
+    this.recipeBookServ.insertRecipeToDB(reqObj).subscribe(
+      (result)=>{
+        console.log('Result : ',result);
+        this.openSnackBar("Recipe added to DB","Okay");
+      },
+      (error)=>{
+        console.log("Error : ",error);
+      }
+    );
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {duration:5*1000});
   }
 
 }
