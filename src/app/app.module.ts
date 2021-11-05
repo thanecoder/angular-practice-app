@@ -32,6 +32,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { UpdateRecipeComponent } from './recipe-book/update-recipe/update-recipe.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     ShoppingListFormComponent,
     HeaderComponent,
     NewRecipeFormComponent,
+    UpdateRecipeComponent,
   ],
   imports: [
     BrowserModule,
