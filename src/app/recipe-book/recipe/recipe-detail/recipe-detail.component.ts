@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Recipe } from 'src/app/models/recipe.model';
 import { RecipeBookService } from 'src/app/services/recipe-book.service';
 
@@ -9,30 +10,28 @@ import { RecipeBookService } from 'src/app/services/recipe-book.service';
 })
 export class RecipeDetailComponent implements OnInit {
   recipeToBeDisplayed: Recipe;
-  recipeBookServ:RecipeBookService;
+  recipeId:number;
 
-  constructor(private recipeBookService:RecipeBookService) { 
-    this.recipeBookServ = recipeBookService;
-  }
+  constructor(private recipeBookServ:RecipeBookService,private router:Router, private activatedRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getSelectedRecipe();
-    setTimeout(()=>{
-      if(!this.recipeToBeDisplayed){
-        this.recipeToBeDisplayed = this.recipeBookService.dummyRecipe;
-      }
-    },1000)
+    if(!this.recipeToBeDisplayed){
+      this.recipeToBeDisplayed = this.recipeBookServ.dummyRecipe;
+    }
   }
 
   getSelectedRecipe(){
-    this.recipeBookServ.selectedRecipe.subscribe(
-      (recipe)=>{
-        this.recipeToBeDisplayed = recipe
-      },
-      (error)=>{
-        console.log(error);
+    this.activatedRoute.queryParams.subscribe(
+      (params)=>{
+        this.recipeId = params.id;
+        this.recipeToBeDisplayed = this.recipeBookServ.recipesArr.filter(r => r.id == this.recipeId)[0];
       }
-    );
+    )
+  }
+
+  updateRecipe(){
+    this.router.navigate(['../update',this.recipeId],{relativeTo: this.activatedRoute});
   }
 
 }

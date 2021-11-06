@@ -1,3 +1,6 @@
 .recipe-item{
     margin-bottom: 5%;
 }
+.update-button:focus:not(:focus-visible) {
+    outline: none;
+}

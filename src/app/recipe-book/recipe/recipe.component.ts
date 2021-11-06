@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Recipe } from 'src/app/models/recipe.model';
 import { RecipeBookService } from 'src/app/services/recipe-book.service';
+import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
 
 @Component({
@@ -12,34 +14,49 @@ import { RecipeListComponent } from './recipe-list/recipe-list.component';
 export class RecipeComponent implements OnInit {
 
   @ViewChild(RecipeListComponent) recipeList: RecipeListComponent;
+  @ViewChild(RecipeDetailComponent) recipeDetail: RecipeDetailComponent;
 
-  constructor(private recipeBookService:RecipeBookService) {
+
+  constructor(private recipeBookService:RecipeBookService, private router:Router,private activatedRoute:ActivatedRoute) {
 
   }
 
   ngOnInit(): void {
-
-  }
-
-  ngAfterViewInit(){
     this.getAllRecipes();
   }
 
-  getAllRecipes(){
+getAllRecipes(){
+  if(!this.recipeList){
+    console.log('Into this undefined if condition');
+    this.recipeBookService.recipesArr.push(this.recipeBookService.dummyRecipe);
+  }
+  console.log('calling api');
+  this.recipeBookService.getAllRecipesFromDB().subscribe(
+    (result)=>{
+      console.log('api result called');
+      let recipeArr = (result) as Array<Recipe>;
+      this.recipeBookService.recipesArr = recipeArr;
+      this.recipeList.recipes = recipeArr;
+      this.router.navigate(['./details'],{relativeTo: this.activatedRoute, queryParams:{id:1}});
+    },
+    (error)=>{
+      console.log(error);
+      this.recipeList.recipes.push(this.recipeBookService.dummyRecipe);
+    }
+  );
+  }
+
+  getAllRecipesForListOnly(){
     this.recipeBookService.getAllRecipesFromDB().subscribe(
       (result)=>{
-        // console.log(result.data);
-        this.recipeList.recipes = (result) as Array<Recipe>;
-        this.recipeBookService.selectedRecipe.next(this.recipeList.recipes[0]);
+        let recipeArr = (result) as Array<Recipe>;
+        this.recipeBookService.recipesArr = recipeArr;
       },
       (error)=>{
         console.log(error);
         this.recipeList.recipes.push(this.recipeBookService.dummyRecipe);
       }
     );
-    if(!this.recipeList.recipes){
-      this.recipeList.recipes.push(this.recipeBookService.dummyRecipe);
-    }
   }
 
 }

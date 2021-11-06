@@ -1,0 +1,25 @@
+<div class="recipe-update-block">
+    <mat-card class="update-form-container">
+        <form [formGroup]="recipeForm" (submit)="sendUpdatedRecipeToDB()" class="update-form">
+            <div>
+                <mat-form-field appearance="fill">
+                    <mat-label>Recipe Name</mat-label>
+                    <input matInput type="text" formControlName="recipeName">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field appearance="fill">
+                    <mat-label>Recipe Image URL</mat-label>
+                    <input matInput type="text" formControlName="recipeImg">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field appearance="fill">
+                    <mat-label>Recipe Description</mat-label>
+                    <textarea matInput formControlName="recipeDesc"></textarea>
+                </mat-form-field>
+            </div>
+            <button mat-stroked-button type="submit">Update Recipe</button>
+        </form>
+    </mat-card>
+</div>

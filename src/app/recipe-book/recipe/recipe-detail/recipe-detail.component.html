@@ -1,4 +1,4 @@
-<div class="row recipe-detail-block">
+<div class="recipe-detail-container">
     <mat-card [class.mat-elevation-z0]='true' class="example-card">
         <mat-card-header>
             <img 
@@ -19,6 +19,7 @@
           </p>
         </mat-card-content>
         <mat-card-actions>
+            <button mat-button (click)="updateRecipe()">Update Recipe</button>
         </mat-card-actions>
     </mat-card>
 </div>

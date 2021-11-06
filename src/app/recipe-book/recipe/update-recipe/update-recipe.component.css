@@ -1,0 +1,36 @@
+.recipe-update-block{
+    margin-top: 2%;
+    margin-left: 10%;
+    border-left: 1px solid rgba(255,255,255,0.2);
+    width: 90%;
+    float: right;
+}
+.update-form-container{
+    border-radius: 25px;
+    background-color: #303030;
+    border:1px solid rgba(255,255,255,0.2);
+    margin-left: 10%;
+}
+.update-form{
+    margin-bottom: 30% !important;
+}
+::ng-deep .mat-focused .mat-form-field-label {
+    /*change color of label*/
+    color: white !important;
+    caret-color: rgb(230, 15, 147) !important;
+}
+  
+::ng-deep.mat-form-field-underline {
+    /*change color of underline*/
+    background-color: white !important;
+    caret-color: rgb(199, 29, 134) !important;
+} 
+  
+::ng-deep.mat-form-field-ripple {
+    /*change color of underline when focused*/
+    background-color: white !important;
+    caret-color: rgb(207, 23, 137) !important;
+}
+::ng-deep .filter input {
+    caret-color: rgb(224, 16, 197) !important;
+}

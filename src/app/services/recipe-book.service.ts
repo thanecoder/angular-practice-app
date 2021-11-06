@@ -14,15 +14,14 @@ import { Recipe } from '../models/recipe.model';
 })
 export class RecipeBookService {
 
+  recipesArr:Recipe[] = [];
   dummyRecipe = {
     id:999,
     name:"Test Recipe",
     description:"Test Description",
     imagePath:"https://cdn.pixabay.com/photo/2016/02/11/22/01/mistake-1194670_960_720.png"
   }
-
-  selectedRecipe = new Subject<Recipe>();
-
+  loadRecipeList = new Subject();
   public httpOptions;
 
   constructor(private http: HttpClient) {
@@ -44,6 +43,13 @@ export class RecipeBookService {
 
   insertRecipeToDB(reqObj){
     return this.http.post(environment.API_URL+constants.INSERT_RECIPES, reqObj,this.httpOptions).pipe(
+      map(result => this.extractDataFromApiResult(result)),
+      catchError(error => this.handleError(error))
+    );
+  }
+
+  updateRecipe(reqObj){
+    return this.http.post(environment.API_URL+constants.UPDATE_RECIPE, reqObj,this.httpOptions).pipe(
       map(result => this.extractDataFromApiResult(result)),
       catchError(error => this.handleError(error))
     );

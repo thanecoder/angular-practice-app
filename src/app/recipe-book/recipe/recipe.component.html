@@ -1,12 +1,8 @@
 <div class="recipe-container">
-    <div class="recipe-list">
-        <div class="col-md-3">
-            <app-recipe-list></app-recipe-list>
-        </div>
+    <div class="recipe-list-block">
+        <app-recipe-list></app-recipe-list>
     </div>
-    <div class="recipe-detail">
-        <div class="col-md-9">
-            <app-recipe-detail></app-recipe-detail>
-        </div>
+    <div class="recipe-detail-block">
+        <router-outlet></router-outlet>
     </div>
 </div>

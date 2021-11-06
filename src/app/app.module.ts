@@ -32,7 +32,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import { UpdateRecipeComponent } from './recipe-book/update-recipe/update-recipe.component';
+import { UpdateRecipeComponent } from './recipe-book/recipe/update-recipe/update-recipe.component';
+import { DropdownDirective } from './directives/dropdown.directive';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { UpdateRecipeComponent } from './recipe-book/update-recipe/update-recipe
     HeaderComponent,
     NewRecipeFormComponent,
     UpdateRecipeComponent,
+    DropdownDirective,
   ],
   imports: [
     BrowserModule,
