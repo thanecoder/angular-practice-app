@@ -1,0 +1,14 @@
+.login-form-block{
+    margin:10% 25%;
+    width: 50% !important;
+}
+.login-button{
+    width: 40% !important;
+    text-align:center;
+    margin: 2% 30% 0 30%;
+}
+.login-signup-button{
+    width: 40% !important;
+    text-align:center;
+    margin: 1% 30% 0 30%;
+}

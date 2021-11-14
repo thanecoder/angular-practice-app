@@ -15,12 +15,16 @@
       <mat-list-item (click)="drawer.toggle()">
           <span class="nav-caption">Close</span>
       </mat-list-item>
+      <mat-list-item (click)="logOutUser()">
+          <span class="nav-caption">Logout</span>
+      </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <app-header (sidenavToggle)="toggleSidenav()"></app-header>
+    <app-header (sidenavToggle)="toggleSidenav()" *ngIf="isUserLoggedIn"></app-header>
+    <app-login-page *ngIf="!isUserLoggedIn" (loginEvent)="userLoggedIn()"></app-login-page>
     <div>
-      <router-outlet></router-outlet>
+      <router-outlet *ngIf="isUserLoggedIn"></router-outlet>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

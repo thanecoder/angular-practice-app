@@ -1,5 +1,5 @@
 <div class="recipe-detail-container">
-    <mat-card [class.mat-elevation-z0]='true' class="example-card">
+    <mat-card *ngIf="recipeToBeDisplayed != undefined" [class.mat-elevation-z0]='true' class="example-card">
         <mat-card-header>
             <img 
             mat-card-avatar

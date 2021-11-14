@@ -37,7 +37,6 @@ getAllRecipes(){
       let recipeArr = (result) as Array<Recipe>;
       this.recipeBookService.recipesArr = recipeArr;
       this.recipeList.recipes = recipeArr;
-      this.router.navigate(['./details'],{relativeTo: this.activatedRoute, queryParams:{id:1}});
     },
     (error)=>{
       console.log(error);

@@ -4,6 +4,7 @@
 }
 .recipe-list-block{
     display: inline-block;
+    width: 20%;
 }
 .recipe-detail-block{
     display: inline-block;

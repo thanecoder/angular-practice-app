@@ -12,20 +12,25 @@ export class RecipeDetailComponent implements OnInit {
   recipeToBeDisplayed: Recipe;
   recipeId:number;
 
-  constructor(private recipeBookServ:RecipeBookService,private router:Router, private activatedRoute:ActivatedRoute) { }
+  constructor(private recipeBookServ:RecipeBookService,private router:Router, private activatedRoute:ActivatedRoute) {
+
+  }
 
   ngOnInit(): void {
     this.getSelectedRecipe();
-    if(!this.recipeToBeDisplayed){
-      this.recipeToBeDisplayed = this.recipeBookServ.dummyRecipe;
-    }
   }
 
   getSelectedRecipe(){
     this.activatedRoute.queryParams.subscribe(
       (params)=>{
         this.recipeId = params.id;
-        this.recipeToBeDisplayed = this.recipeBookServ.recipesArr.filter(r => r.id == this.recipeId)[0];
+        if(this.recipeBookServ.recipesArr.length > 0){
+          this.recipeToBeDisplayed = this.recipeBookServ.recipesArr.filter(r => r.id == this.recipeId)[0];
+        }
+        else{
+          this.recipeToBeDisplayed = this.recipeBookServ.dummyRecipe;
+        }
+
       }
     )
   }

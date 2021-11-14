@@ -4,8 +4,8 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RecipeListComponent } from './recipe-book/recipe/recipe-list/recipe-list.component';
@@ -34,6 +34,9 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { UpdateRecipeComponent } from './recipe-book/recipe/update-recipe/update-recipe.component';
 import { DropdownDirective } from './directives/dropdown.directive';
+import { UserSessionService } from './services/user-session.service';
+import { AuthInterceptor } from './interceptor/auth-interceptor';
+import { RecipeBookService } from './services/recipe-book.service';
 
 @NgModule({
   declarations: [
@@ -54,6 +57,7 @@ import { DropdownDirective } from './directives/dropdown.directive';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     MatToolbarModule,
@@ -71,7 +75,10 @@ import { DropdownDirective } from './directives/dropdown.directive';
     MatSelectModule,
     MatSnackBarModule
   ],
-  providers: [],
+  providers: [
+    UserSessionService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

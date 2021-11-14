@@ -4,3 +4,6 @@
 .update-button:focus:not(:focus-visible) {
     outline: none;
 }
+.recipe-description{
+    font-size: 15px;
+}

@@ -15,19 +15,19 @@ import { Recipe } from '../models/recipe.model';
 export class RecipeBookService {
 
   recipesArr:Recipe[] = [];
-  dummyRecipe = {
+  public dummyRecipe = {
     id:999,
     name:"Test Recipe",
     description:"Test Description",
     imagePath:"https://cdn.pixabay.com/photo/2016/02/11/22/01/mistake-1194670_960_720.png"
   }
-  loadRecipeList = new Subject();
+  public loadRecipeList = new Subject();
   public httpOptions;
 
   constructor(private http: HttpClient) {
     this.httpOptions= {headers: new HttpHeaders({
       'Content-Type':  'application/json'
-  })};
+    })};
   }
 
   getAllRecipesFromDB(){
@@ -55,8 +55,9 @@ export class RecipeBookService {
     );
   }
 
-  extractDataFromApiResult(value: any){
-    return value.data as Array<any>;
+  extractDataFromApiResult(res: any){
+    let body = res.data;
+    return body || [];
   }
 
   handleError(error: any): any {
